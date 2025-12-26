@@ -13,19 +13,26 @@ import org.kie.internal.utils.KieHelper;
  */
 public class SimpleDroolsAgent {
 
-    public static final SimpleDroolsAgent INSTANCE = new SimpleDroolsAgent();
+    private static final SimpleDroolsAgent INSTANCE = new SimpleDroolsAgent();
 
     private KieBase kieBase;
 
     private SimpleDroolsAgent() {
-//        kieBase = DroolsUtils.createKieBase("loan-application.drl");
+        kieBase = DroolsUtils.createKieBase("loan-application.drl");
     }
 
-    @Agent("loan approval rule engine.")
-    public boolean approve(@V("request") LoanApplication loanApplication) {
+    public static SimpleDroolsAgent getInstance() {
+        return INSTANCE;
+    }
 
-        // run drools
-        System.out.println("Running Drools rules for loanApplication: " + loanApplication);
-        return true;
+    @Agent(description = "loan approval rule engine.", outputKey = "result")
+    public boolean approve(@V("loanApplication") LoanApplication loanApplication) {
+        System.out.println("*** SimpleDroolsAgent.approve: loanApplication = " + loanApplication);
+
+        try (var kieSession = kieBase.newKieSession()) {
+            kieSession.insert(loanApplication);
+            kieSession.fireAllRules();
+            return loanApplication.isApproved();
+        }
     }
 }

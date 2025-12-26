@@ -24,6 +24,7 @@ public class DroolsUtils {
     private DroolsUtils() {
     }
 
+    // expects files under resources/org/example/
     public static KieBase createKieBase(String... fileNames) {
         List<Path> paths = new ArrayList<>();
         for (int i = 0; i < fileNames.length; i++) {
