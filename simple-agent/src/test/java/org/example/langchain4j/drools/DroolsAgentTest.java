@@ -37,7 +37,7 @@ class DroolsAgentTest {
 
         ResultWithAgenticScope<String> result = loanAssistant
                 .approveLoan("""
-                                     Evaluate a loan application for a 45 year old person requesting a loan of $3000.
+                                     Evaluate a loan application for John who is a 45 year old person requesting a loan of $3000.
                                      """);
 
         System.out.println("===================================================");
