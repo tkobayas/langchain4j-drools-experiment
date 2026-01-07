@@ -9,7 +9,7 @@ import org.kie.api.KieBase;
 import org.kie.internal.utils.KieHelper;
 
 /**
- * A simple Drools agent that contains loan approval rules.
+ * A simple Drools agent that contains loan approval rules. NonAI agent.
  */
 public class SimpleDroolsAgent {
 

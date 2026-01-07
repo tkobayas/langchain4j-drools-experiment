@@ -8,6 +8,9 @@ import static org.example.langchain4j.drools.Models.baseModel;
 
 class DroolsAgentTest {
 
+    /**
+     * Demonstrates sequence Extractor -> NonAI Drools Agent
+     */
     @Test
     void testSimpleDrools() {
 
@@ -19,6 +22,7 @@ class DroolsAgentTest {
         SimpleDroolsAgent droolsAgent = SimpleDroolsAgent.getInstance(); // non-AI agent
 
         // supervisor fails because "loanApplication" in agentic scope is overwritten with String (SupervisorPlanner.nextSubagent)
+        // See https://github.com/langchain4j/langchain4j/issues/4375
 //        LoanAssistant loanAssistant = AgenticServices.supervisorBuilder(LoanAssistant.class)
 //                .chatModel(plannerModel())
 //                .responseStrategy(SupervisorResponseStrategy.SUMMARY)
@@ -26,14 +30,9 @@ class DroolsAgentTest {
 //                .outputKey("summary")
 //                .build();
 
-//        MockEvaluator evaluator = AgenticServices.agentBuilder(MockEvaluator.class)
-//                .chatModel(baseModel())
-//                .outputKey("result")
-//                .build();
-
+        // So we use sequenceBuilder instead
         LoanAssistant loanAssistant = AgenticServices.sequenceBuilder(LoanAssistant.class)
                 .subAgents(extractor, droolsAgent)
-                .outputKey("summary")
                 .build();
 
         ResultWithAgenticScope<String> result = loanAssistant
