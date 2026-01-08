@@ -1,0 +1,26 @@
+package org.example;
+
+import org.example.langchain4j.drools.domain.LoanApplication;
+
+// Below rules are mutually exclusive and cover all scenarios for loan applications
+
+rule NotAdult
+when
+    $l: LoanApplication( applicant.age < 18 )
+then
+    modify($l) { setApproved(false) };
+end
+
+rule ApprovableAmount
+when
+    $l: LoanApplication( applicant.age >= 18, amount <= 5000 )
+then
+    modify($l) { setApproved(true) };
+end
+
+rule HighAmount
+when
+    $l: LoanApplication( applicant.age >= 18, amount > 5000 )
+then
+    modify($l) { setApproved(false) };
+end

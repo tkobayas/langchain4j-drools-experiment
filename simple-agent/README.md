@@ -1,3 +1,3 @@
 ## simple-agent
 
-Demonstrates sequence Extractor -> NonAI Drools Agent
+Demonstrates Supervisor with Extractor Agent -> NonAI Drools Agent
