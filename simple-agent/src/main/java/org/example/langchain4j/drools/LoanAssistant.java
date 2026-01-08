@@ -9,6 +9,8 @@ import dev.langchain4j.service.V;
  */
 public interface LoanAssistant {
 
+    // UserMessage is not used by SupervisorPlanner
+    // To adjust a final response, use supervisorContext
     @Agent
     ResultWithAgenticScope<String> approveLoan(@V("request") String request);
 }

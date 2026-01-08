@@ -25,6 +25,7 @@ public class SimpleDroolsAgent {
         return INSTANCE;
     }
 
+    // Key Point: the return value is boolean. It's not very informative, so the supervisor doesn't provide a great summary.
     @Agent(description = "loan approval rule engine.", outputKey = "result")
     public boolean approve(@V("loanApplication") LoanApplication loanApplication) {
         System.out.println("*** SimpleDroolsAgent.approve: loanApplication = " + loanApplication);
