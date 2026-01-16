@@ -12,6 +12,8 @@ import dev.langchain4j.service.tool.ToolExecution;
 /**
  * An AgentListener implementation that tracks and logs agent and tool invocations.
  * Generally, built-in AgentMonitor is good enough, but this class is to explore a better implementation.
+ *
+ * CustomLogging is also nice!
  */
 public class TrackingAgentListener implements AgentListener {
 

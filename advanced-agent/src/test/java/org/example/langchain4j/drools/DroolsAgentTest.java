@@ -4,12 +4,18 @@ import dev.langchain4j.agentic.AgenticServices;
 import dev.langchain4j.agentic.scope.ResultWithAgenticScope;
 import dev.langchain4j.agentic.supervisor.SupervisorResponseStrategy;
 import org.junit.jupiter.api.Test;
+import util.log.CustomLogging;
+import util.log.LogLevels;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.example.langchain4j.drools.Models.baseModel;
 import static org.example.langchain4j.drools.Models.plannerModel;
 
 class DroolsAgentTest {
+
+    static {
+        CustomLogging.setLevel(LogLevels.PRETTY, 200);  // control how much you see from the model calls
+    }
 
     /**
      * Demonstrates Supervisor with a Loan Agent with Extractor Agent + Drools Tool + summary providing
