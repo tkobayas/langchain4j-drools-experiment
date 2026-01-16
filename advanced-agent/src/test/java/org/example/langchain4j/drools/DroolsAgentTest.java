@@ -17,8 +17,11 @@ class DroolsAgentTest {
     @Test
     void testAdvancedDrools() {
 
+        TrackingAgentListener agentListener = new TrackingAgentListener();
+
         AdvancedDroolsAgent droolsAgent = AgenticServices.agentBuilder(AdvancedDroolsAgent.class)
                 .chatModel(baseModel())
+                .listener(agentListener)
                 .outputKey("evaluation")
                 .build();
 
@@ -26,6 +29,7 @@ class DroolsAgentTest {
                 .chatModel(plannerModel())
                 .responseStrategy(SupervisorResponseStrategy.SUMMARY)
                 .subAgents(droolsAgent)
+                .listener(agentListener)
                 .outputKey("summary")
                 .build();
 
@@ -40,5 +44,9 @@ class DroolsAgentTest {
         System.out.println("summary: " + summary);
 
         assertThat(summary).containsAnyOf("rejected");
+
+        System.out.println("===================================================");
+        System.out.println("Agent Listener Logs:");
+        agentListener.printLogs();
     }
 }

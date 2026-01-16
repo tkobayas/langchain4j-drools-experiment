@@ -4,8 +4,6 @@ import dev.langchain4j.agentic.Agent;
 import dev.langchain4j.agentic.declarative.ToolsSupplier;
 import dev.langchain4j.service.UserMessage;
 import dev.langchain4j.service.V;
-import org.example.langchain4j.drools.domain.LoanApplication;
-import org.kie.api.KieBase;
 
 /**
  * A simple Drools agent that contains loan approval rules. NonAI agent.
@@ -27,5 +25,4 @@ public interface AdvancedDroolsAgent {
     static Object tools() {
         return DroolsExecutorTool.getInstance();
     }
-
 }

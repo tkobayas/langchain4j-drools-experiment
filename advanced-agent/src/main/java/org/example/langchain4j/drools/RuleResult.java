@@ -19,4 +19,12 @@ public class RuleResult {
     public List<String> getFiredRules() {
         return firedRules;
     }
+
+    @Override
+    public String toString() {
+        return "RuleResult{" +
+                "approved=" + approved +
+                ", firedRules=" + firedRules +
+                '}';
+    }
 }

@@ -28,7 +28,7 @@ public class DroolsExecutorTool {
     }
 
     @Tool("evaluate if a loan application is approved or not.")
-    public RuleResult evaluate(@P("loan application") LoanApplication loanApplication) {
+    public RuleResult executeRules(@P("loan application") LoanApplication loanApplication) {
         System.out.println("*** DroolsExecutorTool.evaluate: loanApplication = " + loanApplication);
 
         try (var kieSession = kieBase.newKieSession()) {
