@@ -1,13 +1,8 @@
 package org.example.langchain4j.drools;
 
-import java.io.File;
-import java.io.FileInputStream;
-import java.net.URISyntaxException;
+import java.io.InputStream;
 import java.net.URL;
 import java.nio.file.Path;
-import java.nio.file.Paths;
-import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 
 import org.drools.model.codegen.ExecutableModelProject;
@@ -26,25 +21,41 @@ public class DroolsUtils {
 
     // expects files under resources/org/example/
     public static KieBase createKieBase(String... fileNames) {
-        List<Path> paths = new ArrayList<>();
-        for (int i = 0; i < fileNames.length; i++) {
-            URL url = DroolsUtils.class.getClassLoader().getResource(EXAMPLE_PKG + fileNames[i]);
-            try {
-                paths.add(Paths.get(url.toURI()));
-            } catch (URISyntaxException e) {
-                throw new RuntimeException(e);
+        KieServices ks = KieServices.Factory.get();
+        KieFileSystem kfs = ks.newKieFileSystem();
+
+        for (String fileName : fileNames) {
+            String resourcePath = EXAMPLE_PKG + fileName;
+            URL url = DroolsUtils.class.getClassLoader().getResource(resourcePath);
+            if (url == null) {
+                throw new RuntimeException("Resource not found: " + resourcePath);
+            }
+
+            try (InputStream is = url.openStream()) {
+                byte[] bytes = is.readAllBytes();
+                kfs.write("src/main/resources/" + resourcePath,
+                          ks.getResources().newByteArrayResource(bytes));
+            } catch (Exception e) {
+                throw new RuntimeException("Failed to read DRL file: " + resourcePath, e);
             }
         }
-        return createKieBase(paths);
+
+        ReleaseId releaseId = ks.newReleaseId("org.example.langchain4j.drools", "drools-agent", "1.0.0");
+        kfs.generateAndWritePomXML(releaseId);
+        ks.newKieBuilder(kfs).buildAll(ExecutableModelProject.class);
+        KieContainer kcontainer = ks.newKieContainer(releaseId);
+        return kcontainer.getKieBase();
     }
 
+    // Keep this method for backward compatibility with tests
     public static KieBase createKieBase(List<Path> paths) {
         KieServices ks = KieServices.Factory.get();
         KieFileSystem kfs = ks.newKieFileSystem();
         for (Path path : paths) {
-            try {
+            try (InputStream is = path.toUri().toURL().openStream()) {
+                byte[] bytes = is.readAllBytes();
                 kfs.write("src/main/resources/" + EXAMPLE_PKG + path.getFileName().toString(),
-                          ks.getResources().newInputStreamResource(new FileInputStream(path.toFile())));
+                          ks.getResources().newByteArrayResource(bytes));
             } catch (Exception e) {
                 throw new RuntimeException("Failed to read DRL file: " + path, e);
             }
