@@ -12,12 +12,6 @@
   </parent>
 
   <artifactId>simple-drools-mcp</artifactId>
-  <version>1.0.0</version>
-
-  <properties>
-    <quarkus.platform.version>3.27.1</quarkus.platform.version>
-    <quarkus-mcp.version>1.8.0</quarkus-mcp.version>
-  </properties>
 
   <dependencyManagement>
     <dependencies>
@@ -50,7 +44,7 @@
     <dependency>
       <groupId>org.drools</groupId>
       <artifactId>drools-engine</artifactId>
-      <version>10.1.0</version>
+      <version>${drools.version}</version>
     </dependency>
 
     <!-- Quarkus Testing -->
@@ -69,7 +63,7 @@
     <dependency>
       <groupId>org.assertj</groupId>
       <artifactId>assertj-core</artifactId>
-      <version>3.24.2</version>
+      <version>${assertj.version}</version>
       <scope>test</scope>
     </dependency>
 
@@ -94,7 +88,7 @@
       </plugin>
       <plugin>
         <artifactId>maven-surefire-plugin</artifactId>
-        <version>3.0.0-M7</version>
+        <version>${maven-surefire-plugin.version}</version>
         <configuration>
           <systemPropertyVariables>
             <java.util.logging.manager>org.jboss.logmanager.LogManager</java.util.logging.manager>

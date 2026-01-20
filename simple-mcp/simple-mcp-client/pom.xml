@@ -12,12 +12,6 @@
   </parent>
 
   <artifactId>simple-mcp-client</artifactId>
-  <version>1.0.0</version>
-
-  <properties>
-    <quarkus.platform.version>3.27.1</quarkus.platform.version>
-    <quarkus-langchain4j.version>1.5.0</quarkus-langchain4j.version>
-  </properties>
 
   <dependencyManagement>
     <dependencies>
@@ -57,7 +51,7 @@
     <dependency>
       <groupId>org.example.langchain4j</groupId>
       <artifactId>simple-drools-mcp</artifactId>
-      <version>1.0.0</version>
+      <version>${project.version}</version>
     </dependency>
 
     <!-- Quarkus Testing -->
@@ -76,7 +70,7 @@
     <dependency>
       <groupId>org.assertj</groupId>
       <artifactId>assertj-core</artifactId>
-      <version>3.24.2</version>
+      <version>${assertj.version}</version>
       <scope>test</scope>
     </dependency>
 
@@ -101,7 +95,7 @@
       </plugin>
       <plugin>
         <artifactId>maven-surefire-plugin</artifactId>
-        <version>3.0.0-M7</version>
+        <version>${maven-surefire-plugin.version}</version>
         <configuration>
           <systemPropertyVariables>
             <java.util.logging.manager>org.jboss.logmanager.LogManager</java.util.logging.manager>
