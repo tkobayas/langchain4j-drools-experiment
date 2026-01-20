@@ -14,31 +14,31 @@ class SimpleDroolsToolTest {
 
     @Test
     void testApprove_adultWithSmallAmount() {
-        String result = droolsTool.approve("John", 45, 3000);
-        assertThat(result).isEqualTo("true");
+        Boolean result = droolsTool.approve("John", 45, 3000);
+        assertThat(result).isTrue();
     }
 
     @Test
     void testApprove_edgeCase_exactlyEighteenAndFiveThousand() {
-        String result = droolsTool.approve("Alice", 18, 5000);
-        assertThat(result).isEqualTo("true");
+        Boolean result = droolsTool.approve("Alice", 18, 5000);
+        assertThat(result).isTrue();
     }
 
     @Test
     void testReject_tooYoung() {
-        String result = droolsTool.approve("Jane", 16, 3000);
-        assertThat(result).isEqualTo("false");
+        Boolean result = droolsTool.approve("Jane", 16, 3000);
+        assertThat(result).isFalse();
     }
 
     @Test
     void testReject_amountTooLarge() {
-        String result = droolsTool.approve("Bob", 30, 8000);
-        assertThat(result).isEqualTo("false");
+        Boolean result = droolsTool.approve("Bob", 30, 8000);
+        assertThat(result).isFalse();
     }
 
     @Test
     void testReject_bothConditionsFail() {
-        String result = droolsTool.approve("Charlie", 16, 10000);
-        assertThat(result).isEqualTo("false");
+        Boolean result = droolsTool.approve("Charlie", 16, 10000);
+        assertThat(result).isFalse();
     }
 }

@@ -26,7 +26,7 @@ public class SimpleDroolsTool {
     @Tool(description = "Evaluates a loan application based on business rules. " +
                        "Approves loans up to $5000 for applicants 18 years or older. " +
                        "Returns 'true' if approved, 'false' if rejected.")
-    public String approve(
+    public Boolean approve(
             @ToolArg(description = "Applicant's name") String applicantName,
             @ToolArg(description = "Applicant's age in years") int applicantAge,
             @ToolArg(description = "Loan amount requested in dollars") int amount) {
@@ -41,7 +41,7 @@ public class SimpleDroolsTool {
             kieSession.fireAllRules();
             boolean result = loanApplication.isApproved();
             LOG.infof("Loan application result: %s", result ? "APPROVED" : "REJECTED");
-            return String.valueOf(result);
+            return result;
         }
     }
 }
