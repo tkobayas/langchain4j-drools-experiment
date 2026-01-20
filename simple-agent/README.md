@@ -1,3 +1,3 @@
 ## simple-agent
 
-Demonstrates Supervisor with Extractor Agent -> NonAI Drools Agent
+Supervisor, Domain model extractor Agent, Drools execution NonAIAgent

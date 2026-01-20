@@ -1,3 +1,3 @@
 ## advanced-agent
 
-Demonstrates Supervisor with a Loan Agent with Extractor Agent + Drools Tool + summary providing
+Supervisor, Wrapper Agent, Drools execution Tool, DRL provider Tool (to enrich the response) 
