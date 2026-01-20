@@ -4,7 +4,6 @@ import io.quarkiverse.mcp.server.Tool;
 import io.quarkiverse.mcp.server.ToolArg;
 import jakarta.enterprise.context.ApplicationScoped;
 import org.example.langchain4j.drools.domain.LoanApplication;
-import org.example.langchain4j.drools.domain.Person;
 import org.kie.api.KieBase;
 import org.jboss.logging.Logger;
 
@@ -27,12 +26,7 @@ public class SimpleDroolsTool {
                        "Approves loans up to $5000 for applicants 18 years or older. " +
                        "Returns 'true' if approved, 'false' if rejected.")
     public Boolean approve(
-            @ToolArg(description = "Applicant's name") String applicantName,
-            @ToolArg(description = "Applicant's age in years") int applicantAge,
-            @ToolArg(description = "Loan amount requested in dollars") int amount) {
-
-        Person applicant = new Person(applicantName, applicantAge);
-        LoanApplication loanApplication = new LoanApplication(applicant, amount);
+            @ToolArg(description = "Loan application details") LoanApplication loanApplication) {
 
         LOG.infof("Evaluating loan application: %s", loanApplication);
 
