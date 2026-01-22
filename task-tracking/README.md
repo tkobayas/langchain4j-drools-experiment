@@ -6,6 +6,8 @@ This example demonstrates how to build an AI-powered task tracking system using 
 - Execute tasks iteratively and report progress
 - Track task status transitions (PENDING → IN_PROGRESS → COMPLETED)
 
+Note: This example doesn't involve Drools
+
 ## Architecture
 
 This example uses the **AI Service + Tool** approach:

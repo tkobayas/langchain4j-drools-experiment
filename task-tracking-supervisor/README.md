@@ -2,6 +2,8 @@
 
 This example demonstrates task tracking using **SupervisorPlanner** to coordinate multiple specialized agents. It implements the same use case as the `task-tracking` example but uses a multi-agent architecture for comparison.
 
+Note: This example doesn't involve Drools
+
 ## Architecture: SupervisorPlanner + Sub-Agents
 
 ```
