@@ -18,3 +18,7 @@ deptree.txt
 
 .claude/
 tmp/
+
+IMPLEMENTATION_PLAN*
+quarkus.log
+simple-drools-mcp.log*
